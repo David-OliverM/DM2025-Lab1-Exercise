@@ -1,9 +1,8 @@
 """ Utility function for doing analysis on emotion datasets """
 from collections import Counter, OrderedDict
-import plotly.plotly as py
 import plotly.graph_objs as go
-from wordcloud import WordCloud
 import matplotlib.pyplot as plt
+from wordcloud import WordCloud
 
 def get_tokens_and_frequency(token_list):
     """obtain word frequecy from pandas dataframe column of lists"""
@@ -53,32 +52,26 @@ def plot_heat_map(plot_x, plot_y, plot_z):
         "type": "heatmap"
     }
 
-    data = go.Data([trace])
-    layout = {
-        "legend": {
-            "bgcolor": "#F5F6F9",
-            "font": {"color": "#4D5663"}
-        },
-        "paper_bgcolor": "#F5F6F9",
-        "plot_bgcolor": "#F5F6F9",
-        "xaxis1": {
+    layout = go.Layout(
+        legend={"bgcolor": "#F5F6F9", "font": {"color": "#4D5663"}},
+        paper_bgcolor="#F5F6F9",
+        plot_bgcolor="#F5F6F9",
+        xaxis={
             "gridcolor": "#E1E5ED",
             "tickfont": {"color": "#4D5663"},
-            "title": "",
-            "titlefont": {"color": "#4D5663"},
+            "title": {"text": ""},
             "zerolinecolor": "#E1E5ED"
         },
-        "yaxis1": {
+        yaxis={
             "gridcolor": "#E1E5ED",
             "tickfont": {"color": "#4D5663"},
-            "title": "",
-            "titlefont": {"color": "#4D5663"},
+            "title": {"text": ""},
             "zeroline": False,
             "zerolinecolor": "#E1E5ED"
         }
-    }
+    )
 
-    fig = go.Figure(data = data, layout=layout)
+    fig = go.Figure(data=[trace], layout=layout)
     return fig
 
 def get_trace(X_pca, data, category, color):
